@@ -79,16 +79,28 @@ static int get_max(Node start){
 }
     }return max;
 }
+static int max(Node start){
+int max=start.data;
+for(Node i=start;i!=null;i=i.next){
+    if(i.data>max){
+        max=i.data;
+
+    }
+}return max;
+
+}
 // slices
-static Node[] slices(Node parentnode){
+static Node[] slices(Node start,int mid){
+    int currentindex=0;
     Node slice_1=null;
     Node slice_2=null;
-    Node current=parentnode;
+    Node current=start;
     while(current!=null){
-        if(current.data<=500){
+        if(currentindex<=mid){
             slice_1=Node.insert(current.data,slice_1);
         }else{
             slice_2=Node.insert(current.data,slice_2);}
+            currentindex++;
    current=current.next; }
 
 return new Node[]{slice_1,slice_2};
@@ -105,7 +117,7 @@ static void print_all(Node s){
     System.out.println("-> null");
 } }
 
-public class ll_methods {
+public class linked_methods {
     public static void main(String[] args) {
         
 //         Node n1=null;
@@ -117,20 +129,32 @@ public class ll_methods {
 //     n2=Node.insert(i1,n2);
 //    }
         Node start=null;
-        Node mstart=null;
-        Node nstart=null;
+        // Node mstart=null;
+        // Node nstart=null;
 
         start=Node.insert(100,start);
          start=Node.insert(181,start);
         start=Node.insert(534,start);
         start=Node.insert(698,start);
          start=Node.insert(911,start);
-        start= Node.delete(81,start);
+        // start= Node.delete(81,start);
           start=Node.insert(600,start);
          start=Node.insert(111,start);
-        start= Node.delete(381,start);
+        // start= Node.delete(381,start);
+        int count=0;
+        for (Node i=start;i!=null;i=i.next){
+            count++;
+ }System.out.println(count+"count");
+ int mid=count/2;
+Node result[]=Node.slices(start,mid);
+ Node slice_1=result[0];
+  Node slice_2=result[1];
+    Node.print_all(slice_1);
+  Node.print_all(slice_2);
+//   System.out.println(slice_1+"  slice:1");
+//     System.out.println(slice_2+"  slice:2");
    
-        System.out.println(start.get_max(start));
+        // System.out.println(start.get_max(start));
 //         System.out.println("parent node");
 //               Node.print_all(start);
 //        Node result[]=Node.slices(start);
@@ -141,8 +165,11 @@ public class ll_methods {
 
 //     System.out.println("Sliced List 2 (> 500):");
 //     Node.print_all(list_2);
+System.out.println("list after merged");
+Node n3=null;
+     n3=  Node.merge(slice_1,slice_2);
+ System.out.println(n3.max(n3)+":max"); 
 
-    //    Node.merge(n1,n2);
 
     }
 }
